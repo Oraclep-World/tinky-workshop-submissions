@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tinky ✨ — Chain 20260619</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #080b14;
+      --card: #111827;
+      --line: #263248;
+      --text: #e5edf8;
+      --muted: #9fb0c9;
+      --ok: #6ee7b7;
+      --warn: #fbbf24;
+      --tinky: #fbbf24;
+      --tinky2: #f59e0b;
+      --tinky-glow: rgba(251, 191, 36, 0.18);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif;
+      background: radial-gradient(circle at top right, #1a1200 0, #080b14 45%);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+    .stars {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 0;
+    }
+    .star {
+      position: absolute;
+      width: 2px; height: 2px;
+      background: #fbbf24;
+      border-radius: 50%;
+      animation: twinkle var(--dur, 3s) var(--delay, 0s) infinite;
+    }
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.1; transform: scale(1); }
+      50% { opacity: 0.9; transform: scale(1.5); }
+    }
+    main { max-width: 980px; margin: 0 auto; padding: 42px 20px; position: relative; z-index: 1; }
+    .hero {
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 28px 32px;
+      background: linear-gradient(135deg, var(--tinky-glow), rgba(17,24,39,.92));
+      box-shadow: 0 20px 80px rgba(0,0,0,.4), 0 0 40px rgba(251,191,36,.06);
+    }
+    .label { color: var(--muted); font-size: 13px; text-transform: uppercase; letter-spacing: .09em; }
+    .label.tinky { color: var(--tinky); }
+    h1 { margin: 8px 0 10px; font-size: clamp(28px,5vw,52px); letter-spacing: -.04em; }
+    h1 span { color: var(--tinky); }
+    p { color: var(--muted); line-height: 1.65; margin: 0 0 12px; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(200px,1fr)); gap: 14px; margin-top: 20px; }
+    .card {
+      border: 1px solid var(--line);
+      background: rgba(17,24,39,.88);
+      border-radius: 18px;
+      padding: 18px;
+      transition: border-color .2s;
+    }
+    .card:hover { border-color: var(--tinky2); }
+    .value { font-size: 22px; font-weight: 800; margin-top: 6px; word-break: break-all; }
+    .ok { color: var(--ok); }
+    .warn { color: var(--warn); }
+    .tinky-color { color: var(--tinky); }
+    code {
+      background: #0b1020;
+      border: 1px solid var(--line);
+      padding: 2px 7px;
+      border-radius: 8px;
+      font-size: 13px;
+      word-break: break-all;
+    }
+    .btn {
+      margin-top: 18px;
+      background: var(--tinky);
+      color: #000;
+      border: 0;
+      border-radius: 14px;
+      padding: 11px 22px;
+      font-weight: 700;
+      cursor: pointer;
+      font-size: 14px;
+      transition: opacity .15s;
+    }
+    .btn:hover { opacity: .85; }
+    pre {
+      white-space: pre-wrap;
+      color: #d7e3f8;
+      background: #050814;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 14px;
+      overflow: auto;
+      font-size: 13px;
+    }
+    h2 { font-size: 18px; margin: 0 0 8px; }
+    .section { margin-top: 28px; }
+    .status-dot {
+      display: inline-block;
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--ok);
+      margin-right: 6px;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: .4; }
+    }
+    footer { margin-top: 40px; text-align: center; color: var(--muted); font-size: 13px; }
+  </style>
+</head>
+<body>
+<div class="stars" id="stars"></div>
+<main>
+  <section class="hero">
+    <div class="label tinky">✨ Tinky Oracle — Workshop-06 · ARRA Blockchain</div>
+    <h1>Chain <span>20260619</span></h1>
+    <p>Tinky's anvil chain สำหรับ Workshop-06 ของ ARRA Oracle — เรียนรู้ ERC-4337 Paymaster บน local EVM chain ที่ chain ID ตรงกับวันเกิดของ workshop (2026-06-19) ✨</p>
+    <div class="grid">
+      <div class="card">
+        <div class="label">RPC Endpoint</div>
+        <div class="value tinky-color" style="font-size:14px;margin-top:8px;" id="rpc-url">http://141.11.156.4:8547</div>
+      </div>
+      <div class="card">
+        <div class="label">Chain ID</div>
+        <div class="value" id="chainId"><span class="warn">checking…</span></div>
+      </div>
+      <div class="card">
+        <div class="label">Latest Block</div>
+        <div class="value" id="block"><span class="warn">checking…</span></div>
+      </div>
+      <div class="card">
+        <div class="label">Client</div>
+        <div class="value" style="font-size:14px;margin-top:6px;" id="client"><span class="warn">checking…</span></div>
+      </div>
+    </div>
+    <button class="btn" onclick="refresh()">↻ Refresh live RPC</button>
+  </section>
+
+  <div class="section">
+    <div class="grid">
+      <div class="card">
+        <div class="label">Block Explorer</div>
+        <h2>Otterscan</h2>
+        <p style="font-size:13px;">ดู transactions, blocks, contracts บน chain 20260619</p>
+        <a href="http://141.11.156.4:8549" target="_blank" style="color:#93c5fd;font-size:13px;">http://141.11.156.4:8549 ↗</a>
+      </div>
+      <div class="card">
+        <div class="label">What is Paymaster</div>
+        <h2>ERC-4337 Paymaster</h2>
+        <p style="font-size:13px;">Application layer ที่ช่วย sponsor gas (gasless UX) หรือรับ ERC-20 แทน native ETH — ไม่ใช่ protocol-level custom gas token</p>
+      </div>
+      <div class="card">
+        <div class="label">EntryPoint v0.7</div>
+        <h2>0x000...0032</h2>
+        <p style="font-size:13px;"><code>0x0000000071727De22E5E9d8BAf0edAc6f37da032</code></p>
+        <p style="font-size:12px;color:var(--muted);">Predeployed on all EVM chains</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>RPC Proof (eth_blockNumber + eth_chainId)</h2>
+    <pre id="proof">กำลังตรวจสอบ RPC…</pre>
+  </div>
+
+  <div class="section">
+    <h2>MetaMask Setup</h2>
+    <div class="grid">
+      <div class="card"><div class="label">Network Name</div><div class="value" style="font-size:16px;">Tinky Chain</div></div>
+      <div class="card"><div class="label">RPC URL</div><div class="value" style="font-size:13px;">http://141.11.156.4:8547</div></div>
+      <div class="card"><div class="label">Chain ID</div><div class="value">20260619</div></div>
+      <div class="card"><div class="label">Currency Symbol</div><div class="value">ETH</div></div>
+    </div>
+  </div>
+
+  <footer>
+    <span class="status-dot"></span>
+    Tinky Oracle ✨ · Workshop-06 · ARRA Oracle Blockchain · Chain 20260619
+    · <a href="https://github.com/Oraclep-World/tinky-oracle" style="color:#93c5fd;">github.com/Oraclep-World/tinky-oracle</a>
+  </footer>
+</main>
+
+<script>
+const RPC = 'http://141.11.156.4:8547'
+
+function makeBody(method, params = []) {
+  return JSON.stringify({ jsonrpc: '2.0', method, params, id: 1 })
+}
+
+async function rpcCall(method, params = []) {
+  const r = await fetch(RPC, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: makeBody(method, params)
+  })
+  const j = await r.json()
+  return j.result
+}
+
+async function refresh() {
+  document.getElementById('chainId').innerHTML = '<span class="warn">…</span>'
+  document.getElementById('block').innerHTML = '<span class="warn">…</span>'
+  document.getElementById('client').innerHTML = '<span class="warn">…</span>'
+  document.getElementById('proof').textContent = 'กำลังตรวจสอบ…'
+  try {
+    const [chainId, blockHex, clientVer] = await Promise.all([
+      rpcCall('eth_chainId'),
+      rpcCall('eth_blockNumber'),
+      rpcCall('web3_clientVersion')
+    ])
+    const chain = parseInt(chainId, 16)
+    const block = parseInt(blockHex, 16)
+    document.getElementById('chainId').innerHTML = `<span class="${chain === 20260619 ? 'ok' : 'warn'}">${chain}</span>`
+    document.getElementById('block').innerHTML = `<span class="ok">${block}</span>`
+    document.getElementById('client').innerHTML = `<span class="ok" style="font-size:13px;">${clientVer}</span>`
+    document.getElementById('proof').textContent = JSON.stringify({
+      eth_chainId: chainId + ' → ' + chain,
+      eth_blockNumber: blockHex + ' → ' + block,
+      web3_clientVersion: clientVer,
+      timestamp: new Date().toISOString()
+    }, null, 2)
+  } catch (e) {
+    document.getElementById('chainId').innerHTML = '<span class="warn">error</span>'
+    document.getElementById('block').innerHTML = '<span class="warn">error</span>'
+    document.getElementById('client').innerHTML = '<span class="warn">error</span>'
+    document.getElementById('proof').textContent = 'Error: ' + e.message
+  }
+}
+
+// Generate twinkling stars
+const starsEl = document.getElementById('stars')
+for (let i = 0; i < 60; i++) {
+  const s = document.createElement('div')
+  s.className = 'star'
+  s.style.cssText = `left:${Math.random()*100}%;top:${Math.random()*100}%;--dur:${2+Math.random()*4}s;--delay:${Math.random()*3}s;opacity:${0.1+Math.random()*0.5}`
+  starsEl.appendChild(s)
+}
+
+refresh()
+</script>
+</body>
+</html>
