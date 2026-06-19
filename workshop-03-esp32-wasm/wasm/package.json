@@ -1,0 +1,10 @@
+{
+  "name": "tinky-wasm",
+  "type": "module",
+  "scripts": {
+    "asbuild": "asc assembly/index.ts -o build/tinky.wasm"
+  },
+  "devDependencies": {
+    "assemblyscript": "^0.28.19"
+  }
+}

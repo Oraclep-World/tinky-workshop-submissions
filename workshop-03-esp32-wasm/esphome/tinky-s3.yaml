@@ -1,0 +1,24 @@
+esphome:
+  name: tinky-s3
+  friendly_name: Tinky S3
+
+esp32:
+  board: esp32-s3-devkitc-1
+  framework:
+    type: arduino
+
+logger:
+  level: INFO
+
+# A simple component: blink the onboard LED via a GPIO output + interval.
+output:
+  - platform: gpio
+    pin: GPIO48
+    id: led_output
+
+interval:
+  - interval: 1s
+    then:
+      - output.turn_on: led_output
+      - delay: 500ms
+      - output.turn_off: led_output

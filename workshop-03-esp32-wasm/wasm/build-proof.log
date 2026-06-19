@@ -1,0 +1,28 @@
+=== bun init ===
+=== add assemblyscript ===
+bun add v1.3.14 (0d9b296a)
+Resolving dependencies
+Resolved, downloaded and extracted [11]
+Saved lockfile
+
+installed assemblyscript@0.28.19 with binaries:
+ - asc
+ - asinit
+
+3 packages installed [1.52s]
+=== asc version ===
+Version 0.28.19
+=== compile ===
+=== ASC EXIT: 0 ===
+=== artifact ===
+total 16
+drwxrwxr-x 2 pleamvelli pleamvelli 4096 Jun 19 11:13 .
+drwxrwxr-x 5 pleamvelli pleamvelli 4096 Jun 19 11:13 ..
+-rw-rw-r-- 1 pleamvelli pleamvelli  147 Jun 19 11:13 tinky.wasm
+-rw-rw-r-- 1 pleamvelli pleamvelli 1065 Jun 19 11:13 tinky.wat
+bytes: 147
+WebAssembly.validate: true
+exports: add,fib,ledState,memory
+add(2,3)= 5
+fib(10)= 55
+ledState(15)= 1

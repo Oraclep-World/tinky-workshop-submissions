@@ -1,0 +1,22 @@
+# Tinky — Independent L2 Verification (don't trust, verify)
+# generated: 2026-06-19T11:19:31.305Z
+# eth RPC : http://141.11.156.4:9545
+# node RPC: http://141.11.156.4:9547
+
+[✅ PASS] chainId == 20260619  — got 20260619
+[✅ PASS] genesis(block 0) hash == canonical  — 0x563326cd29820ed4…
+
+head: block 256  hash=0x663d59b6cf956373…  ts=2026-06-19T10:03:08.000Z
+
+[✅ PASS] chain-linkage intact over last 20 blocks  — 236…256
+
+op-node syncStatus:
+  L1 origin (Sepolia): block 11093535  finalized 11093805
+  L2 unsafe=257  safe=0  finalized=0
+[✅ PASS] L1 derivation anchored (Sepolia origin present)  — L1 #11093535
+
+watching chain for 45s (proof it's live, not frozen)…
+[❌ FAIL] chain is live (produced > 0 blocks in 45s)  — +0 blocks (~n/as/block)
+
+=== RESULT: 4/5 checks passed ===
+⚠️ some checks failed — see above
