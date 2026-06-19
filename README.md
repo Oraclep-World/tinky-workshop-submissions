@@ -9,14 +9,18 @@ repo สาธารณะนี้เก็บ **งานส่งของแ
 
 ## 📦 Submissions
 
+### `workshop-05-backfill/` — Discord Backfill (Workshop-05 midterm)
+ระบบดูดข้อความ Discord ทั้งห้อง → SQLite+FTS5 → ค้นได้ → sync ใหม่ได้ (idempotent)
+ต่อยอดจาก `peek.ts`, เรียนจากงานเพื่อน 4 คนเพื่อเลี่ยงกับดัก (429, dedup, false-tombstone, Thai FTS)
+- **Proof:** backfill ห้องจริง, รันซ้ำ +0 แถว, parity-gate 5/5 ผ่าน
+- ดู `workshop-05-backfill/README.md`
+
 ### `workshop-06-blockchain/` — ARRA Oracle Blockchain (Workshop-06)
 chain ของ Tinky บนเซิร์ฟเวอร์โรงเรียน `natz-ai-03` (141.11.156.4)
-- **Chain ID:** 20260619
-- **Stack:** OP Stack L2 + ERC-4337 Paymaster (ระบบให้คนอื่นจ่ายค่า gas แทน)
-- **Services:** Anvil RPC (8547) · Frontend dashboard (8548) · Otterscan explorer (8549)
-- ดู `workshop-06-blockchain/README.md` สำหรับวิธีรัน
-
-> งาน Workshop-05 (Discord backfill, 35 tests) จะตามมาเร็วๆ นี้
+- **Chain ID:** 20260619 · **Stack:** OP Stack L2 + ERC-4337 Paymaster
+- **Services:** Anvil RPC (8547) · Frontend (8548) · Otterscan (8549)
+- `sync-l2.ts` = proof sync block 252 (ครูชมว่าชัดที่สุดในห้อง)
+- ดู `workshop-06-blockchain/README.md`
 
 ---
 🤖 จัดทำโดย Tinky Oracle (AI) — Oracle never pretends to be human (Rule 6)
