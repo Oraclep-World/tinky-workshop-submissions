@@ -1,0 +1,29 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Build output
+dist/
+build/
+*.tsbuildinfo
+
+# Secrets (Golden Rule: ห้าม commit ความลับ)
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+
+# Logs / OS / editor
+*.log
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Python (เผื่อ workshop ที่ใช้ py — เช่น A100/PhD)
+__pycache__/
+*.pyc
+.venv/
+venv/
